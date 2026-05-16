@@ -7,6 +7,13 @@ export default function Home() {
   const [username, setUserName] = useState("");
   const router = useRouter();
 
+  const handleJoin = () => {
+    const name = username.trim() === "" ? "Guest" : username.trim();
+    const meetingId = process.env.NEXT_PUBLIC_CALL_ID;
+
+    router.push(`/meeting/${meetingId}?name=${encodeURIComponent(name)}`);
+  };
+
   return (
     <div className="relative flex items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-gray-950 via-blue-950 to-cyan-900 text-white">
       {/* Background Glow Effects */}
@@ -39,7 +46,10 @@ export default function Home() {
         </div>
 
         {/* Button */}
-        <button className="mt-5 w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:scale-[1.02] hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 font-semibold cursor-pointer">
+        <button
+          onClick={handleJoin}
+          className="mt-5 w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:scale-[1.02] hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 font-semibold cursor-pointer"
+        >
           Join Meeting
         </button>
 
